@@ -22,7 +22,11 @@ var John_BMI = John_Mass / John_Height ** 2;
 var IsMark_BMI_Higher = Mark_BMI > John_BMI;
 
 // Output the message to HHML file
-document.write ("<br> Mark's BMI: <b>" + Mark_BMI + "</b></br>");
-document.write ("<br> John's BMI: <b>" + John_BMI + "</b></br>");
-document.write ("<p>Is Mark's BMI higher than John's BMI? <b>" + IsMark_BMI_Higher + "</b></p>");
+//document.write ("<br> Mark's BMI: <b>" + Mark_BMI + "</b></br>");
+//document.write ("<br> John's BMI: <b>" + John_BMI + "</b></br>");
+//document.write ("<p>Is Mark's BMI higher than John's BMI? <b>" + IsMark_BMI_Higher + "</b></p>");
+
+// Print a message to console
+
+console.log ("<p>Is Mark's BMI higher than John's BMI? <b>" + IsMark_BMI_Higher + "</b></p>");
 
