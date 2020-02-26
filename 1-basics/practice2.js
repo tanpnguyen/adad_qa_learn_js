@@ -34,11 +34,11 @@ function maxAverageScore(arrScores)
 		return -1;
 	
 	let maxAverage = calAverage(arrScores[0]);
-	//console.log('max 0: ' + maxAverage);
+	
 	for(let i=1; i<arrScores.length; i++)
 	{
 		let average = calAverage(arrScores[i]);
-		//console.log('max ' + i + ' : ' + maxAverage);
+		
 		if (average > maxAverage)
 			maxAverage = average;
 	}
