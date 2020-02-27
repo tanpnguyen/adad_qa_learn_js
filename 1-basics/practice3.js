@@ -16,10 +16,10 @@ In the end, John would like to have 2 arrays:
 */
 function calBillsTips(pArrBills)
 {
-	let mapTips = new Map();
-	//if (pArrBills.length == 0)
-		//return 0;
+	if (pArrBills.length == 0)
+		return [];
 	
+	let mapTips = new Map();
 	let tip = 0;
 	let bill = 0;
 	let perTip = 0;
@@ -45,7 +45,6 @@ function calPaidAmouts(pMapBillTips)
 	let arrPaidAmouts = [];
 	for(let bill of pMapBillTips.keys())
 	{
-		//paid = bill * (1 + pMapBillTips.get(bill));
 		paid = bill + Number(pMapBillTips.get(bill));
 		arrPaidAmouts.push(paid);
 	}
@@ -56,9 +55,6 @@ function calPaidAmouts(pMapBillTips)
 let arrBills = [124, 48, 268];
 
 let mapBillsTips = calBillsTips(arrBills);
-
-//let obj = Object.fromEntries(mapBillTip.entries());
-//console.log(obj);
 console.log(mapBillsTips);
  
 console.log('Final paid amounts: ' + calPaidAmouts(mapBillsTips));
