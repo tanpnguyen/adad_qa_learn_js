@@ -13,30 +13,67 @@ John and Mike both play basketball in different teams. In the latest 3 games, Jo
 5. Like before, change the scores to generate different winners, keeping in mind there might be draws.
 */
 
-let miKeTeamScore = [89, 120, 103]
-let johnTeamScore = [116, 94, 123]
+// let miKeTeamScore = [89, 120, 103]
+// let johnTeamScore = [116, 94, 123]
 
-let arrAvg = arr => arr.reduce((a, b) => a + b, 0) / arr.length
+// let arrAvg = arr => arr.reduce((a, b) => a + b, 0) / arr.length
 
-let teamWinMessage = (arrAvg(miKeTeamScore) > arrAvg(johnTeamScore)) ? 'Mike\'s team win' : (arrAvg(miKeTeamScore) < arrAvg(johnTeamScore)) ? 'John\'s team win' : 'Two teams are equal'
-
-
-console.log(teamWinMessage)
+// let teamWinMessage = (arrAvg(miKeTeamScore) > arrAvg(johnTeamScore)) ? 'Mike\'s team win' : (arrAvg(miKeTeamScore) < arrAvg(johnTeamScore)) ? 'John\'s team win' : 'Two teams are equal'
 
 
-let maryTeamScore = [116, 94, 123]
-
-let maxAvg = arr => Math.max(...arr);
-
-let maxResult = maxAvg([arrAvg(miKeTeamScore), arrAvg(johnTeamScore), arrAvg(maryTeamScore)])
+// console.log(teamWinMessage)
 
 
-let teamMaxAvgMessage = (maxResult === arrAvg(miKeTeamScore) && maxResult === arrAvg(johnTeamScore) && maxResult != arrAvg(maryTeamScore)) ? 'Mike\'s and John\'s team win'
-    : (maxResult === arrAvg(miKeTeamScore) && maxResult === arrAvg(maryTeamScore) && maxResult != arrAvg(johnTeamScore)) ? 'Mike\'s and Marry\'s team win'
-        : (maxResult === arrAvg(maryTeamScore) && maxResult === arrAvg(johnTeamScore) && maxResult != arrAvg(miKeTeamScore)) ? 'Marry\'s and John\'s team win'
-            : (maxResult == arrAvg(miKeTeamScore) && maxResult != arrAvg(johnTeamScore) && maxResult != arrAvg(maryTeamScore)) ? 'Mike\'s team win'
-                : (maxResult === arrAvg(johnTeamScore) && maxResult != arrAvg(miKeTeamScore) && maxResult != arrAvg(maryTeamScore)) ? 'John\'s team win'
-                    : (maxResult === arrAvg(maryTeamScore) && maxResult != arrAvg(miKeTeamScore) && maxResult != arrAvg(johnTeamScore)) ? 'Marry\'s team win'
-                        : 'Three teams are equal'
+// let maryTeamScore = [116, 94, 123]
 
-console.log(teamMaxAvgMessage)
+// let maxAvg = arr => Math.max(...arr);
+
+// let maxResult = maxAvg([arrAvg(miKeTeamScore), arrAvg(johnTeamScore), arrAvg(maryTeamScore)])
+
+
+// let teamMaxAvgMessage = (maxResult === arrAvg(miKeTeamScore) && maxResult === arrAvg(johnTeamScore) && maxResult != arrAvg(maryTeamScore)) ? 'Mike\'s and John\'s team win'
+//     : (maxResult === arrAvg(miKeTeamScore) && maxResult === arrAvg(maryTeamScore) && maxResult != arrAvg(johnTeamScore)) ? 'Mike\'s and Marry\'s team win'
+//         : (maxResult === arrAvg(maryTeamScore) && maxResult === arrAvg(johnTeamScore) && maxResult != arrAvg(miKeTeamScore)) ? 'Marry\'s and John\'s team win'
+//             : (maxResult == arrAvg(miKeTeamScore) && maxResult != arrAvg(johnTeamScore) && maxResult != arrAvg(maryTeamScore)) ? 'Mike\'s team win'
+//                 : (maxResult === arrAvg(johnTeamScore) && maxResult != arrAvg(miKeTeamScore) && maxResult != arrAvg(maryTeamScore)) ? 'John\'s team win'
+//                     : (maxResult === arrAvg(maryTeamScore) && maxResult != arrAvg(miKeTeamScore) && maxResult != arrAvg(johnTeamScore)) ? 'Marry\'s team win'
+//                         : 'Three teams are equal'
+
+// console.log(teamMaxAvgMessage)
+
+/* Solution 2*/
+
+var players = [
+    {
+        "name": "Mike",
+        "score": [89, 120, 103]
+    },
+    {
+        "name": "John",
+        "score": [89, 120, 103]
+    },
+    {
+        "name": "Marry",
+        "score": [89, 120, 103]
+    }
+]
+
+var arrAvg = arr => arr.reduce((a, b) => a + b, 0) / arr.length
+
+var max = 0
+var temp =[]
+var winTeam = []
+
+players.forEach((obj) => {
+    if (arrAvg(obj.score) >= max) {
+        max = arrAvg(obj.score);
+        temp = obj.score
+    }
+})
+console.log(temp)
+var winTeam = players.filter(function (el) {
+    return _.isEqual(el.score.sort(), temp.sort())
+});
+
+
+winTeam.forEach((el) => { console.log(el) })
