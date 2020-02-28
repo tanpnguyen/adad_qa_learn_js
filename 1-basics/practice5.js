@@ -26,35 +26,73 @@ Mark likes to tip 20% of the bill when the bill is less than $100, 10% when the 
 */
 
 let billsOfJohn = {
-	"bill" : [124, 48, 268, 180, 42]
+	bills: [124, 48, 268, 180, 42],
+	calculateTip: function() {
+		this.tips = [];
+		this.finalPaidAmounts = [];
+
+		for (let i = 0; i < this.bills.length; i++) {
+			var percentage;
+			var bill = this.bills[i];
+			if (bill < 50) {
+				percentage = 0.2;
+			} 
+			else if (bill >= 50 && bill < 200) {
+				percentage = 0.10;
+			}
+			else {
+				percentage = 0.25;
+			}
+			this.tips[i] = bill * percentage;
+			this.finalPaidAmounts[i] = bill + bill * percentage;
+		}
+	}
 }
 
-function calculateTip (bill) {
-	if (bill < 50 && bill > 0) {
-		return 0.2 * bill;
-	}
-	else if (bill >= 50 && bill <= 200) {
-		return 0.15 * bill;
-	}
-	else if (bill > 200) {
-		return 0.1 * bill;
-	}
-	else if (bill <= 0) {
-		return console.log("Bill required greater than 0$");
+billsOfJohn.calculateTip();
+console.log("Array containing all tips of John's family: " + billsOfJohn.tips);
+console.log("Array containing final paid amounts of John's family: " + billsOfJohn.finalPaidAmounts);
+
+let billsOfMark = {
+	bills: [77, 375, 110, 45],
+	calculateTip: function() {
+		this.tips = [];
+		this.finalPaidAmounts = [];
+
+		for(let i = 0; i < this.bills.length; i++) {
+			var percentage;
+			var bill = this.bills[i];
+			if (bill < 100) {
+				percentage = 0.2;
+			} 
+			else if (bill >= 100 && bill < 300) {
+				percentage = 0.10;
+			}
+			else {
+				percentage = 0.10;
+			}
+			this.tips[i] = bill * percentage;
+			this.finalPaidAmounts[i] = bill + bill * percentage;
+		}
 	}
 }
 
-var tips = [];
-var totalOfBill = [];
-
-for(i in billsOfJohn.bill){
-    tips.push(calculateTip(billsOfJohn.bill[i]));
-    totalOfBill.push(calculateTip(billsOfJohn.bill[i]) + billsOfJohn.bill[i]);
+function calculateAverage(tips) {
+    var sum = 0;
+    for(i = 0; i < tips.length; i++){
+        sum = sum + tips[i];
+    }
+    return sum / tips.length;
 }
 
-billsOfJohn.tip = tips;
-billsOfJohn.finalPaidAmounts = totalOfBill;
+billsOfMark.calculateTip();
+billsOfJohn.averageTips = calculateAverage(billsOfJohn.tips);
+billsOfMark.averageTips = calculateAverage(billsOfMark.tips);
+console.log("The average tip of John's family: " + billsOfJohn.averageTips);
+console.log("The average tip of Mark's family: " + billsOfMark.averageTips);
 
-console.log("array containing all tips " + billsOfJohn.tip);
-console.log("array containing final paid amounts " + billsOfJohn.tip);
-console.log(JSON.stringify(billsOfJohn, null, 4))
+let message = (billsOfJohn.averageTips > billsOfMark.averageTips) ? "The family paid the highest tips on average is John's family." : 
+        (billsOfJohn.averageTips < billsOfMark.averageTips) ? "The family paid the highest tips on average is Mark's family." :
+        "2 families have the same tips on average" ;
+       
+console.log(message);
