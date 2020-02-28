@@ -24,3 +24,37 @@ Mark likes to tip 20% of the bill when the bill is less than $100, 10% when the 
 8. Log to the console which family paid the highest tips on average
 
 */
+
+let billsOfJohn = {
+	"bill" : [124, 48, 268, 180, 42]
+}
+
+function calculateTip (bill) {
+	if (bill < 50 && bill > 0) {
+		return 0.2 * bill;
+	}
+	else if (bill >= 50 && bill <= 200) {
+		return 0.15 * bill;
+	}
+	else if (bill > 200) {
+		return 0.1 * bill;
+	}
+	else if (bill <= 0) {
+		return console.log("Bill required greater than 0$");
+	}
+}
+
+var tips = [];
+var totalOfBill = [];
+
+for(i in billsOfJohn.bill){
+    tips.push(calculateTip(billsOfJohn.bill[i]));
+    totalOfBill.push(calculateTip(billsOfJohn.bill[i]) + billsOfJohn.bill[i]);
+}
+
+billsOfJohn.tip = tips;
+billsOfJohn.finalPaidAmounts = totalOfBill;
+
+console.log("array containing all tips " + billsOfJohn.tip);
+console.log("array containing final paid amounts " + billsOfJohn.tip);
+console.log(JSON.stringify(billsOfJohn, null, 4))
