@@ -57,16 +57,16 @@ function getBMI (mass, height){
 }
 
 let person1 = {
-	"name": "Mark",
-	"mass": 60,
-	"height": 1.7
+	name: "Mark",
+	mass: 60,
+	height: 1.7
 }
 
 
 let person2 = {
-	"name": "John",
-	"mass": 60,
-	"height": 1.7
+	name: "John",
+	mass: 60,
+	height: 1.7
 }
 
 person1.BMI = getBMI (person1.mass, person1.height);
