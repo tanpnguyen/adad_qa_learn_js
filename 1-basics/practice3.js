@@ -13,3 +13,28 @@ In the end, John would like to have 2 arrays:
 
 
 */
+
+var bills = [124, 48, 268];
+function calculateTip( bill ){
+    if (bill > 200){
+        return bill*0.1;
+
+    }
+    else if (bill < 50){
+        return bill*0.2;
+    }
+    else {
+        return bill*0.15;
+    }
+
+}
+var tips = new Array();
+var finalPaidAmounts = new Array();
+for(i in bills){
+    tips.push(calculateTip(bills[i]));
+    finalPaidAmounts.push(calculateTip(bills[i]) + bills[i]);
+}
+console.log("All three tips" + tips);
+console.log("All three final paid amounts" + finalPaidAmounts);
+
+
