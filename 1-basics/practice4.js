@@ -11,3 +11,51 @@ Let's remember the first coding challenge where Mark and John compared their BMI
 Remember: BMI = mass / height^2 = mass / (height * height). (mass in kg and height in meter).
 
 */
+//This function is to calculate BMI
+var x, y;
+function calculationBMI(x,y){
+		bmiValue = (x / (y*y));		
+	return bmiValue;
+};
+
+//Declare Mark and John as an object with the calculation method.
+
+var objMark = {
+  name: "Mark",  
+  mass: "50",
+  height: "1.70",
+  calcBMI: function(){
+	return calculationBMI(this.mass,this.height);
+	}
+};
+
+var objJohn = {
+  name: "John",  
+  mass: "65",
+  height: "1.70",
+  calcBMI: function(){
+    return calculationBMI(this.mass,this.height);
+  }
+};
+
+var arrayObject = [objMark, objJohn];
+var arrayBMI = new Array();
+
+//Show BMI of John and Mark;
+
+for (i = 0; i <= arrayObject.length - 1; i++){
+	arrayBMI[i] = arrayObject[i].calcBMI();
+	console.log(arrayObject[i].name + "'s BMI: " + arrayObject[i].calcBMI());
+};
+
+// Identify the one has the highest BMI;
+
+if(arrayBMI[0] > arrayBMI[1]){
+  console.log("The one has the highest BMI is " + objMark.name);
+}
+else  if (arrayBMI[0] < arrayBMI[1]){
+  console.log("The on has the highest BMI is " + objJohn.name);
+} else {
+  console.log("BMI of " + objMark.name + ' and ' + objJohn.name + ' are equal');
+};
+
