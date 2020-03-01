@@ -14,49 +14,59 @@ In the end, John would like to have 2 arrays:
 
 
 */
+
+function calTip(bill)
+{
+	let tip = 0;
+	let perTip = 0;
+	
+	perTip = (bill < 50 && bill > 0) ? 20 :
+			(bill >= 50 && bill <= 200) ? 15 : 10 ;
+	tip = bill * (perTip / 100);			
+				
+	return tip;
+}
+
 function calBillsTips(pArrBills)
 {
 	if (pArrBills.length == 0)
 		return [];
 	
-	let mapTips = new Map();
+	let arrTips = [];
 	let tip = 0;
-	let bill = 0;
-	let perTip = 0;
 	for(let i=0 ; i<pArrBills.length ; i++)
 	{
-		bill = pArrBills[i];
-		perTip = (bill < 50) ? 20 :
-				(bill >= 50 && bill <= 200) ? 15 :
-				10 ;
-		tip = bill * (perTip / 100);
-		mapTips.set(pArrBills[i], tip.toFixed(2));		
+		tip = calTip(pArrBills[i]);
+		arrTips.push(tip);
 	}
 	 
-	return mapTips;
+	return arrTips;
 }
 
-function calPaidAmouts(pMapBillTips)
+function calPaidAmouts(pArrBills)
 {
-	if (pMapBillTips.size == 0)
+	if (pArrBills.size == 0)
 		return [];
 	
-	let paid = 0;
+	let paid;
 	let arrPaidAmouts = [];
-	for(let bill of pMapBillTips.keys())
+	for(let i=0 ; i<pArrBills.length ; i++)
 	{
-		paid = bill + Number(pMapBillTips.get(bill));
+		paid = 0;
+		bill = pArrBills[i];
+		tip = calTip(pArrBills[i]);
+		paid = bill + tip;		
 		arrPaidAmouts.push(paid);
 	}
-	
+		
 	return arrPaidAmouts;
 }
 
 let arrBills = [124, 48, 268];
 
-let mapBillsTips = calBillsTips(arrBills);
-console.log(mapBillsTips);
+let arrTips = calBillsTips(arrBills);
+console.log('Three tips: ' + arrTips);
  
-console.log('Final paid amounts: ' + calPaidAmouts(mapBillsTips));
+console.log('Final paid amounts: ' + calPaidAmouts(arrBills));
 
 
