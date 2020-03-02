@@ -11,3 +11,51 @@ Let's remember the first coding challenge where Mark and John compared their BMI
 Remember: BMI = mass / height^2 = mass / (height * height). (mass in kg and height in meter).
 
 */
+function getBMI (mass, height){
+    return mass/(height*2)
+}
+var propertiesOfMark = new Object();
+propertiesOfMark={
+    name: "Mark",
+    mass: 70,
+    height: 170,
+    BMI : function(){
+        return getBMI(this.mass, this.height)
+    }
+}
+var propertiesOfJohn = new Object();
+propertiesOfJohn={
+    name: "John",
+    mass: 58,
+    height: 169,
+    BMI : function(){
+        return getBMI(this.mass, this.height)
+    }
+}
+function printBMI (properties){
+    console.log("Name: " + properties.name);
+    console.log("BMI: " + properties.BMI());
+}
+function compareBMI(propertiesOfJohn, propertiesOfMark){
+
+    if(propertiesOfJohn.BMI() > propertiesOfMark.BMI()){
+        console.log ("John has highest BMI.");
+        printBMI(propertiesOfJohn);
+    }
+    if (propertiesOfJohn.BMI() < propertiesOfMark.BMI()){
+        console.log ("Mark has highest BMI.");
+        printBMI(propertiesOfMark);
+    }
+    if (propertiesOfJohn.BMI() == propertiesOfMark.BMI()){
+        console.log ("Mark and John have the same BMI.");
+        printBMI(propertiesOfJohn);
+        console.log("And: ");
+        printBMI(propertiesOfMark);
+    }
+}
+compareBMI(propertiesOfJohn, propertiesOfMark);
+
+
+
+
+
