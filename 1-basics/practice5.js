@@ -24,3 +24,77 @@ Mark likes to tip 20% of the bill when the bill is less than $100, 10% when the 
 8. Log to the console which family paid the highest tips on average
 
 */
+//This's a function to calculate tip
+var  billJohn = {
+	bills: [128, 48, 268, 180, 42],
+    tipCalculation: function(){
+       this.tipLists = []; 
+	   this.billPaid = [];
+       for (var i = 0; i < this.bills.length; i++) {
+            var tip;
+            var bill = this.bills[i];
+            if (bill < 50) {
+              tip = (bill * 0.2);
+            }
+            else if (50 <= bill <= 200 ) {
+              tip = (bill * 0.15);
+            }
+            else if (bill > 200){
+              tip = (bill * 0.10);
+            }
+			else {
+				tip = 0;
+			}
+            this.tipLists[i] = parseFloat(tip.toFixed(2));
+            this.billPaid[i] = parseFloat((bill + tip).toFixed(2));
+       }
+	   
+     }
+}
+billJohn.tipCalculation();
+console.log ("\nTip values of John's family: " + billJohn.tipLists, "\nList of bills paid with tips: " + billJohn.billPaid);
+
+var  billMark = {
+	bills: [77, 375, 110, 45, 42],
+    tipCalculation: function(){
+       this.tipLists = []; 
+	   this.billPaid = [];
+       for (var i = 0; i < this.bills.length; i++) {
+            var tip;
+            var bill = this.bills[i];
+            if (bill < 100) {
+              tip = (bill * 0.2);
+            }
+            else if (bill >= 100 && bill <= 300 ) {
+              tip = (bill * 0.10);
+            }
+            else {
+              tip = (bill * 0.25);
+            }
+            this.tipLists[i] = parseFloat(tip.toFixed(2));
+            this.billPaid[i] = parseFloat((bill + tip).toFixed(2));
+       }
+     }
+}
+billMark.tipCalculation();
+console.log ("\nTip values of Mark's family: " + billMark.tipLists, "\nList of bills paid with tips: " + billMark.billPaid);
+
+// Function to calculate Average of Tips
+function calcAverage(tipLists) {
+    var sum = 0;
+    for(i = 0; i < tipLists.length; i++){
+        sum = sum + tipLists[i];
+    }
+    return sum / (tipLists.length);
+}
+
+// Calculate Average of John and Mark and compare 
+billJohn.average = (calcAverage(billJohn.tipLists)).toFixed(2);
+billMark.average = (calcAverage(billMark.tipLists)).toFixed(2);
+console.log ("\nJohn's average tip: $" + billJohn.average);
+console.log ("Mark's average tip: $" + billMark.average);
+if (billJohn.average > billMark.average) {
+    console.log("\n John's family average tip is higher than Mark's family");
+} else if (billMark.average > billJohn.average) {
+    console.log("\n Mark's family average tip is higher than John's family");
+}
