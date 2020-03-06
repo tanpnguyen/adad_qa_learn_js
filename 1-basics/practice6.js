@@ -36,12 +36,19 @@ var quizSample = function(){
     this.question = '';
     this.objQuizOPtions = {A: '', B: '', C: ''};
     this.objAnswer = '';
-    quizSample.prototype.formatQuizOptions = function(){
-        let str = "";
-        for (let [key, value] of Object.entries(this.objQuizOPtions)) {
-            str += `${key}` + ". " + `${value} \n`
-        }
-        return str;
+}
+
+quizSample.prototype.formatQuizOptions = function(){
+    let str = "";
+    for (let [key, value] of Object.entries(this.objQuizOPtions)) {
+        str += `${key}` + ". " + `${value} \n`
+    }
+    return str;
+}
+ 
+var randomContent = function(arrQuiz){
+    quizRandom.prototype.itemRandom = function(){
+        return arrQuiz[Math.floor(Math.random() * arrQuiz.length)];
     }
 }
 
@@ -69,7 +76,10 @@ quizContent03.objQuizOPtions.C = 'Angular';
 quizContent03.answer = 'A';
 arrQuiz.push(quizContent03);
 
-let quizRandom = arrQuiz[Math.floor(Math.random() * arrQuiz.length)];
+//let quizRandom = arrQuiz[Math.floor(Math.random() * arrQuiz.length)];
+let quizRandom = new randomContent(arrQuiz);
+//console.log(quizRandom);
+//console.log(quizRandom.itemRandom);
 console.log(quizRandom.question);
 console.log(quizRandom.formatQuizOptions());
 let quizRandomAnswer = prompt("Please select one answer!", "");
@@ -83,7 +93,7 @@ if(quizRandomAnswer == quizRandom.answer){
     statements
 })(); */
 
-(function(){
+/* (function(){
     let iConfirm = confirm("Do you want to answer another question?");
     if(iConfirm){
         let quizRandom = arrQuiz[Math.floor(Math.random() * arrQuiz.length)];
@@ -96,7 +106,7 @@ if(quizRandomAnswer == quizRandom.answer){
             console.log("Incorrect answer!");
         }
     }
-})();
+})(); */
 
 
 
