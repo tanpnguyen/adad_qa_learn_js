@@ -38,18 +38,25 @@ var quizSample = function(){
     this.objAnswer = '';
 }
 
-quizSample.prototype.formatQuizOptions = function(){
+quizSample.prototype.displayQuiz = function(){
     let str = "";
+    str = this.question + `\n`
     for (let [key, value] of Object.entries(this.objQuizOPtions)) {
         str += `${key}` + ". " + `${value} \n`
     }
     return str;
 }
- 
-var randomContent = function(arrQuiz){
-    quizRandom.prototype.itemRandom = function(){
-        return arrQuiz[Math.floor(Math.random() * arrQuiz.length)];
+
+quizSample.prototype.quizCheck = function(quizAnswer, quizOriAnswer){
+    let str = "Incorrect answer";
+    if(quizOriAnswer == quizAnswer){
+        str = "Correct answer!";
     }
+    return str;
+}
+ 
+var randomList = function(arrQuiz){
+    this.randomItem = arrQuiz[Math.floor(Math.random() * arrQuiz.length)];
 }
 
 var quizContent01 = new quizSample();
@@ -76,37 +83,22 @@ quizContent03.objQuizOPtions.C = 'Angular';
 quizContent03.answer = 'A';
 arrQuiz.push(quizContent03);
 
-//let quizRandom = arrQuiz[Math.floor(Math.random() * arrQuiz.length)];
-let quizRandom = new randomContent(arrQuiz);
-//console.log(quizRandom);
-//console.log(quizRandom.itemRandom);
-console.log(quizRandom.question);
-console.log(quizRandom.formatQuizOptions());
-let quizRandomAnswer = prompt("Please select one answer!", "");
-if(quizRandomAnswer == quizRandom.answer){
-    console.log("Correct answer!");
-}else{
-    console.log("Incorrect answer!");
-}
+var quizItem = new randomList(arrQuiz).randomItem;
+var quizItemAnswer = quizItem.answer;
+console.log(quizItem.displayQuiz());
+let quizAnswer = prompt("Please select one answer!", "");
+console.log(quizItem.quizCheck(quizAnswer, quizItemAnswer));
 
-/* (function () {
-    statements
-})(); */
-
-/* (function(){
+(function(){
     let iConfirm = confirm("Do you want to answer another question?");
     if(iConfirm){
-        let quizRandom = arrQuiz[Math.floor(Math.random() * arrQuiz.length)];
-        console.log(quizRandom.question);
-        console.log(quizRandom.formatQuizOptions());
-        let quizRandomAnswer = prompt("Please select one answer!", "");
-        if(quizRandomAnswer == quizRandom.answer){
-            console.log("Correct answer!");
-        }else{
-            console.log("Incorrect answer!");
-        }
+        quizItem = new randomList(arrQuiz).randomItem;
+        quizItemAnswer = quizItem.answer;
+        console.log(quizItem.displayQuiz());
+        quizAnswer = prompt("Please select one answer!", "");
+        console.log(quizItem.quizCheck(quizAnswer, quizItemAnswer));
     }
-})(); */
+})();
 
 
 
