@@ -30,83 +30,74 @@ So make sure that all your code is private and doesn't interfere with the other 
 (Hint: we learned a special technique to do exactly that).
 */
 
-var arrQuiz = [];
 
-var quizSample = function(){
-    this.question = '';
-    this.objQuizOPtions = {A: '', B: '', C: ''};
-    this.objAnswer = '';
-}
 
-quizSample.prototype.formatQuizOptions = function(){
-    let str = "";
-    for (let [key, value] of Object.entries(this.objQuizOPtions)) {
-        str += `${key}` + ". " + `${value} \n`
+//Using IIFE
+(() => {
+    var arrQuiz = [];
+    //Define a function contructor named quizSample
+    var quizSample = function (question, objQuizOPtions, objAnswer) {
+        this.question = question;
+        this.objQuizOPtions = objQuizOPtions;
+        this.objAnswer = objAnswer;
     }
-    return str;
-}
- 
-var randomContent = function(arrQuiz){
-    quizRandom.prototype.itemRandom = function(){
+
+    //Add method to object named formatQuizOptions
+    quizSample.prototype.formatQuizOptions = function () {
+        let str = "";
+        for (let [key, value] of Object.entries(this.objQuizOPtions)) {
+            str += `${key}` + ". " + `${value} \n`
+        }
+        return str;
+    }
+
+    //Write a method to get the random element in object
+    var randomContent = function (arrQuiz) {
         return arrQuiz[Math.floor(Math.random() * arrQuiz.length)];
     }
-}
 
-var quizContent01 = new quizSample();
-quizContent01.question = 'Who invented JavaScript?';
-quizContent01.objQuizOPtions.A = 'Douglas Crockford';
-quizContent01.objQuizOPtions.B = 'Sheryl Sandberg';
-quizContent01.objQuizOPtions.C = 'Brendan Eich';
-quizContent01.answer = 'C';
-arrQuiz.push(quizContent01);
-
-var quizContent02 = new quizSample();
-quizContent02.question = 'Which one of these is a JavaScript package manager?';
-quizContent02.objQuizOPtions.A = 'Node.js';
-quizContent02.objQuizOPtions.B = 'TypeScript';
-quizContent02.objQuizOPtions.C = 'npm';
-quizContent02.answer = 'C';
-arrQuiz.push(quizContent02);
-
-var quizContent03 = new quizSample();
-quizContent03.question = 'Which tool can you use to ensure code quality?';
-quizContent03.objQuizOPtions.A = 'ESLint';
-quizContent03.objQuizOPtions.B = 'jQuery';
-quizContent03.objQuizOPtions.C = 'Angular';
-quizContent03.answer = 'A';
-arrQuiz.push(quizContent03);
-
-//let quizRandom = arrQuiz[Math.floor(Math.random() * arrQuiz.length)];
-let quizRandom = new randomContent(arrQuiz);
-//console.log(quizRandom);
-//console.log(quizRandom.itemRandom);
-console.log(quizRandom.question);
-console.log(quizRandom.formatQuizOptions());
-let quizRandomAnswer = prompt("Please select one answer!", "");
-if(quizRandomAnswer == quizRandom.answer){
-    console.log("Correct answer!");
-}else{
-    console.log("Incorrect answer!");
-}
-
-/* (function () {
-    statements
-})(); */
-
-/* (function(){
-    let iConfirm = confirm("Do you want to answer another question?");
-    if(iConfirm){
-        let quizRandom = arrQuiz[Math.floor(Math.random() * arrQuiz.length)];
+    // Add method to object displayQuestion 
+    quizSample.prototype.displayQuestion = () => {
         console.log(quizRandom.question);
         console.log(quizRandom.formatQuizOptions());
-        let quizRandomAnswer = prompt("Please select one answer!", "");
-        if(quizRandomAnswer == quizRandom.answer){
-            console.log("Correct answer!");
-        }else{
-            console.log("Incorrect answer!");
-        }
     }
-})(); */
+
+    // Add method to object checkAnswer 
+    quizSample.prototype.checkAnswer = (answer) => {
+        var result = false
+        if (this.objAnswer == answer) {
+            console.log("Anwser is correct !")
+            result = true
+        }
+        else{
+            console.log("Please try again !")
+        }
+
+        return result
+    }
+
+    //Initialize 3 questions
+    var quizContent01 = new quizSample('Who invented JavaScript?',
+        { A: 'Douglas Crockford', B: 'Sheryl Sandberg', C: 'Brendan Eich' },
+        'C')
+    var quizContent02 = new quizSample('Which one of these is a JavaScript package manager?', { A: 'Node.js', B: 'TypeScript', C: 'npm' }, 'C')
+    var quizContent03 = new quizSample('Which tool can you use to ensure code quality?', { A: 'ESLint', B: 'jQuery', C: 'Angular' }, 'A')
+
+    //Create an array to store 3 question objects
+    var quizzes = [quizContent01, quizContent02, quizContent03]
+
+    //Call random function to return a questions
+    let quizRandom = new randomContent(quizzes);
+
+    //Display question
+    quizRandom.displayQuestion()
+    //Promt to get user's answer
+    var answer = prompt("Please select one answer!", "");
+    //Checkanwser
+    quizRandom.checkAnswer(answer)
+
+})();
+
 
 
 
