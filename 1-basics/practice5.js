@@ -24,3 +24,135 @@ Mark likes to tip 20% of the bill when the bill is less than $100, 10% when the 
 8. Log to the console which family paid the highest tips on average
 
 */
+
+function makeObject(pName, pBills)
+{
+	let name = (pName === undefined || pName === null ) ? '' : pName;
+	let bills = (pBills === undefined || pBills === null) ? [] : pBills;
+
+	return {name, bills};
+}
+
+function calTip1(bill)
+{
+	let tip = 0;
+	let perTip = 0;
+	
+	perTip = (bill < 50 && bill > 0) ? 20 :
+			(bill >= 50 && bill <= 200) ? 15 : 10 ;
+	tip = bill * (perTip / 100);			
+				
+	return tip;
+}
+
+function calPaidAmout(pBill)
+{
+	let paid = (pBill < 0) ? 0 : (pBill + calTip(pBill));
+	
+	return paid;
+}
+
+function calBillsTips(pName, pArrBills)
+{
+	if (pName.trim() === '')
+		return [];
+	
+	if (pArrBills === undefined || pArrBills === null || (pArrBills.length == 0))
+		return [];
+		
+	let arrTips = [];
+	let tip = 0;
+	let name = pName.trim().toLowerCase();
+	for(let i=0 ; i<pArrBills.length ; i++)
+	{
+		if (name === 'john')
+		{
+			tip = calTip1(pArrBills[i]);
+		}
+		else if (name === 'mark')
+			{
+				tip = calTip2(pArrBills[i]);
+			}	
+		arrTips.push(tip);
+	}
+	
+	return arrTips;
+}
+
+function calPaidAmouts(pName, pArrBills)
+{
+	if (pName.toString().trim() === '')
+		return [];
+	
+	if (pArrBills === undefined || pArrBills === null || (pArrBills.length == 0))
+		return [];
+	
+	let paid = 0;
+	let bill = 0;
+	let arrPaidAmouts = [];
+	let name = pName.trim().toLowerCase();
+	for(let i=0 ; i<pArrBills.length ; i++)
+	{
+			bill = pArrBills[i];
+			if (name === 'john')
+			{
+				tip = calTip1(bill);
+			}
+			else if (name === 'mark')
+				{
+					tip = calTip2(bill);
+				}
+			paid = bill + tip;		
+			arrPaidAmouts.push(paid);
+	}
+		
+	return arrPaidAmouts;
+}
+
+function calTip2(bill)
+{
+	let tip = 0;
+	let perTip = 0;
+	
+	perTip = (bill < 100 && bill > 0) ? 20 :
+			(bill >= 100 && bill <= 300) ? 10 : 25 ;
+	tip = bill * (perTip / 100);			
+				
+	return tip;
+}
+
+function calAverageTips(arrTips)
+{
+	if (arrTips === undefined || arrTips === null || (arrTips.length == 0))
+		return 0;	
+	
+	let sumTips = 0;
+	for(let i=0; i<arrTips.length; i++)
+	{
+		sumTips += arrTips[i];
+	}
+	
+	return (sumTips/arrTips.length);
+}
+
+let arrBillsOfJohn = [124, 48, 268, 180, 42];
+let objJohn = makeObject('John', arrBillsOfJohn);
+objJohn.tips = calBillsTips(objJohn.name, objJohn.bills);
+objJohn.finalPaidAmounts = calPaidAmouts(objJohn.bills);
+objJohn.avgTip = calAverageTips(objJohn.tips);
+console.log('Bills, tips, paidAmounts of John:');
+console.log(objJohn);
+
+let arrBillsOfMark = [77, 375, 110, 45];
+let objMark = makeObject('Mark', arrBillsOfMark);
+objMark.tips = calBillsTips(objMark.name, objMark.bills);
+objMark.finalPaidAmounts = calPaidAmouts(objMark.bills);
+objMark.avgTip = calAverageTips(objMark.tips);
+console.log('Bills, tips, paidAmounts of Mark:');
+console.log(objMark);
+
+let msgHighestTip = (objJohn.avgTip > objMark.avgTip) ? 'John\'s family paid highest tips on average' :
+					(objJohn.avgTip < objMark.avgTip) ? 'Mark\'s family paid highest tips on average' : 
+					'Both two families paid same tips on average';
+					
+console.log(msgHighestTip);
